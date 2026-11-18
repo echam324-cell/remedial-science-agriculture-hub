@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import '../data/sample_content.dart';
+import '../data/lesson_content.dart';
+import 'lesson_screen.dart';
 import '../models/learning_subject.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -51,23 +53,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showTopic(BuildContext context, LearningSubject subject, LearningTopic topic) {
-    showModalBottomSheet<void>(
-      context: context, isScrollControlled: true, showDragHandle: true,
-      builder: (context) => Padding(
-        padding: const EdgeInsets.fromLTRB(22, 8, 22, 30),
-        child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Text(subject.title.toUpperCase(), style: TextStyle(color: subject.color, fontWeight: FontWeight.w800, letterSpacing: 1.1)),
-          const SizedBox(height: 8),
-          Text(topic.title, style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w800)),
-          const SizedBox(height: 12), Text(topic.description), const SizedBox(height: 18),
-          Row(children: [const Icon(Icons.school_outlined, size: 18), const SizedBox(width: 6), Text('Grade ${topic.grade}'), const SizedBox(width: 20), const Icon(Icons.schedule_outlined, size: 18), const SizedBox(width: 6), Text(topic.duration)]),
-          const SizedBox(height: 20),
-          const Text('Detailed learning notes, illustrations and practice activities for this topic will be added in the next content phase.'),
-          const SizedBox(height: 18),
-          SizedBox(width: double.infinity, child: FilledButton(onPressed: () => Navigator.pop(context), child: const Text('Back to subjects'))),
-        ]),
-      ),
-    );
+    final lesson = learningLessons[topic.title];
+    if (lesson == null) return;
+    Navigator.of(context).push(MaterialPageRoute<void>(
+      builder: (_) => LessonScreen(lesson: lesson),
+    ));
   }
 
   void _showAbout(BuildContext context) {

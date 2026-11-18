@@ -1,4 +1,11 @@
 include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  errors:
+    # Flutter 3.50 currently marks the Material library import as deprecated.
+    # Keep the stable Material widgets API while the upstream package transition settles.
+    deprecated_member_use: ignore
+
 linter:
   rules:
     avoid_print: true

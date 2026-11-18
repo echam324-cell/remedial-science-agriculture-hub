@@ -140,7 +140,10 @@ class _OfflineNote extends StatelessWidget {
     decoration: BoxDecoration(color: const Color(0xFFEAF2EC), borderRadius: BorderRadius.circular(16)),
     child: const Row(children: [
       Icon(Icons.wifi_off_rounded, color: Color(0xFF286548)), SizedBox(width: 10),
-      Expanded(child: Text('Designed to make learning resources available offline. More downloadable lessons are coming soon.', style: TextStyle(color: Color(0xFF28513D, height: 1.35))),
+      Expanded(child: Text(
+        'Designed to make learning resources available offline. More downloadable lessons are coming soon.',
+        style: TextStyle(color: Color(0xFF28513D), height: 1.35),
+      )),
     ]),
   );
 }
